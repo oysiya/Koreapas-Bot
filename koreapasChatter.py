@@ -61,21 +61,11 @@ def attackUser(*arg):
         users = userList.find_elements_by_class_name('user')
         for el in users:
             if (el.text==c)&(c!=n):
-                case = random.randint(0,4)
+				weaponList = ['두꺼운 전공서적으로', '거대한 솜사탕으로', '수중의 돈을 모두 던지며', '지나가는 연대생의 신발을 빼앗아', '고파파에게 고자질해서']
+                case = random.randint(0,len(weaponList))
                 critical = random.randint(0,9)
                 target = c
-                sendStr=n+'님이 '
-                if case==0:
-                    sendStr = sendStr + '두꺼운 전공서적으로 '
-                elif case==1:
-                    sendStr = sendStr + '거대한 솜사탕으로 '
-                elif case==2:
-                    sendStr = sendStr + '수중의 돈을 모두 던지며 '
-                elif case==3:
-                    sendStr = sendStr + '지나가는 연대생의 신발을 빼앗아 '
-                elif case==4:
-                    sendStr = sendStr + '고파파에게 고자질해서 '
-                sendStr = sendStr + target + '님을 공격합니다.'
+                sendStr = n + '님이 ' + weaponList[case] + ' ' + target + '님을 공격합니다.'
                 typeIn(sendStr)
                 if critical==9:
                     typeIn('Critical Hit! ' + target + ': 헤롱헤롱~')
