@@ -3,6 +3,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 import random
 
+typeHeader = "[Barney Bot] "
+
 def initialize(username, password):
     driver.get('http://koreapas.com')
     driver.find_element_by_name("user_id").clear()
@@ -31,14 +33,14 @@ def howmanyUsers(*arg):
     userList = driver.find_element_by_class_name('member_list')
     users = userList.find_elements_by_class_name('user')
     numUsers = str(len(users))
-    sendStr = "[Barney Bot] 현재 " + numUsers + "명의 유저가 잉여력을 발산하고 있습니다."
+    sendStr = "현재 " + numUsers + "명의 유저가 잉여력을 발산하고 있습니다."
     typeIn(sendStr)
     safetyLock = 0
 
 def whatUsers(*arg):
     global safetyLock
     userList = driver.find_element_by_class_name('member_list')
-    sendStr = "[Barney Bot] 현재 잉여인 유저들: "
+    sendStr = "현재 잉여인 유저들: "
     for e in userList.find_elements_by_class_name('user'):
         sendStr = sendStr + e.text + "/"
     sendStr = sendStr[:-1]
@@ -51,7 +53,7 @@ def attackUser(*arg):
     n = arg[0]
     c = arg[1].replace('-attack ','')
     if (len(c) - len(c.replace(' ','')))>0:
-        typeIn("[Barney Bot] 명령어 오류! (형식: -attack 닉네임)")
+        typeIn("명령어 오류! (형식: -attack 닉네임)")
         safetyLock = 0
         return False
     else:
@@ -62,7 +64,7 @@ def attackUser(*arg):
                 case = random.randint(0,4)
                 critical = random.randint(0,9)
                 target = c
-                sendStr='[Barney Bot] '+n+'님이 '
+                sendStr=n+'님이 '
                 if case==0:
                     sendStr = sendStr + '두꺼운 전공서적으로 '
                 elif case==1:
@@ -76,15 +78,15 @@ def attackUser(*arg):
                 sendStr = sendStr + target + '님을 공격합니다.'
                 typeIn(sendStr)
                 if critical==9:
-                    typeIn('[Barney Bot] Critical Hit! ' + target + ': 헤롱헤롱~')
+                    typeIn('Critical Hit! ' + target + ': 헤롱헤롱~')
                 safetyLock = 0
                 return True
             elif (el.text==c)&(c==n):
-                sendStr='[Barney Bot] '+n+'님이 자신을 마구 괴롭힙니다. 변태!'
+                sendStr=n+'님이 자신을 마구 괴롭힙니다. 변태!'
                 typeIn(sendStr)
                 safetyLock = 0
                 return True
-        sendStr='[Barney Bot] '+n+'님이 허공에 주먹을 마구 휘두릅니다. 휙휙!'
+        sendStr=n+'님이 허공에 주먹을 마구 휘두릅니다. 휙휙!'
         typeIn(sendStr)
         safetyLock = 0
         return True
@@ -105,15 +107,15 @@ def randUser(*arg):
     users = userList.find_elements_by_class_name('user')
     target = users[(random.randint(1,len(users))-1)].text
     if n==target:
-        sendStr = "[Barney Bot] " + n + " 왈: 자추라니... 내가 자추라니!!!"
+        sendStr = n + " 왈: 자추라니... 내가 자추라니!!!"
     else:
-        sendStr = "[Barney Bot] " + n + " 왈: 너로 정했다, " + target + "!!!"
+        sendStr = n + " 왈: 너로 정했다, " + target + "!!!"
     typeIn(sendStr)
     safetyLock = 0
 
 def cmdHelp(*arg):
     global safetyLock
-    typeIn("[Barney Bot] 사용 가능한 명령어를 표시합니다.")
+    typeIn("사용 가능한 명령어를 표시합니다.")
     typeIn("-help: 이 도움말을 표시합니다. -who: 채팅 중인 유저 목록을 띄웁니다. -count: 채팅 중인 유저의 수를 봅니다. -rand: 임의의 유저를 지목합니다. -attack NICKNAME: 해당 유저를 공격합니다. -ra: 임의의 유저를 공격합니다.")
     safetyLock = 0
 
