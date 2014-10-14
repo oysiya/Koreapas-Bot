@@ -23,7 +23,7 @@ def makeDic(**kwargs):
 def typeIn(str):
     conv = driver.find_element_by_css_selector("input.conversation")
     conv.clear()
-    conv.send_keys(str)
+    conv.send_keys(typeHeader + str)
     conv.send_keys(Keys.ENTER)
 
 def howmanyUsers(*arg):
